@@ -52,6 +52,18 @@
                     return;
                 });
         });
+
+        function toggleFullscreen() {
+            let elem = document.querySelector('#content');
+
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {
+                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
     </script>
 
     <div id="content">
