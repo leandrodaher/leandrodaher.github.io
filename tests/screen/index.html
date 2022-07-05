@@ -49,7 +49,7 @@
         });
 
         function toggleFullscreen() {
-            let elem = document.querySelector('#content');
+            let elem = document.getElementsByTagName('html')[0];
             elem.requestFullscreen();
         }
 
