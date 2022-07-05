@@ -41,12 +41,10 @@
 
 <body>
     <script>
-        document.addEventListener("DOMContentLoaded", function (e) {
-            window.setTimeout(toggleFullscreen, 2000);
-
-            window.setTimeout(portrait, 5000);
-
-        });
+        function click() {
+            toggleFullscreen();
+            window.setTimeout(portrait, 2000);
+        }
 
         function toggleFullscreen() {
             let elem = document.getElementsByTagName('html')[0];
