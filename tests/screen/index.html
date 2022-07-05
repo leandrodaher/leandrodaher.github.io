@@ -25,6 +25,19 @@
             align-items: center;
         }
 
+        #maindiv {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hide;
+            background-color: #eeeeee;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         #content {
             display: block;
             width: 100%;
@@ -41,25 +54,9 @@
 
 <body>
     <script>
-        function btnClick() {
-            toggleFullscreen();
-            window.setTimeout(portrait, 2000);
-        }
+        function toggleFullScreen() {
+            let pagina = document.getElementById('maindiv');
 
-        function toggleFullscreen() {
-            let elem = document.getElementsByTagName('html')[0];
-            elem.requestFullscreen();
-        }
-
-        toggleFullScreen = function () {
-            let pagina = document.getElementsByTagName('html')[0];
-
-            let isInFullScreen =
-                (document.fullscreenElement && document.fullscreenElement !== null) ||
-                (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-                (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-                (document.msFullscreenElement && document.msFullscreenElement !== null);
-            if (!isInFullScreen) {
                 if (pagina.requestFullScreen) {
                     // W3C API
                     pagina.requestFullScreen();
@@ -70,23 +67,8 @@
                     // Webkit current API
                     pagina.webkitRequestFullScreen();
                 } else if (pagina.webkitEnterFullScreen) {
-                    // se o navegador não suporta full screen, significa que só sobrou o fullscreen nativo para paginas no Safari Mobile, este nós não vamos utilizar pois impede a exibição do CPF na tela
-
-                    // This is the IOS Mobile edge case
-                    // video.webkitEnterFullScreen();
+                    return;
                 }
-
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
         }
 
         function portrait() {
@@ -99,19 +81,37 @@
                     alert(error);
                     return;
                 });
+            
+            window.screen.orientation.lock('landscape')
+                .then(function () {
+                    alert('ok!');
+                    return;
+                })
+                .catch(error => {
+                    alert(error);
+                    return;
+                });
+        }
+
+        function btnClick() {
+            toggleFullScreen();
+            window.setTimeout(portrait, 2000);
         }
     </script>
-
-    <div id="content">
-        <button onclick="btnClick()">FULL</button>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra metus at lectus gravida, ac sagittis
-        augue semper. Morbi ac dolor eu ipsum condimentum lacinia. Nunc sed commodo mi. Aliquam eget vehicula enim.
-        Morbi tempor ex vitae lacus rhoncus interdum. Fusce in sem tempor, finibus purus nec, ullamcorper lectus.
-        Phasellus ligula mauris, condimentum nec fermentum ac, condimentum at odio. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Nullam congue eleifend ex sit amet auctor. Donec in lectus pellentesque, tincidunt
-        ipsum vel, elementum mi. Mauris fermentum ullamcorper ante, ut aliquam mi vehicula in. Phasellus et arcu sed
-        nisi auctor pretium. Aliquam fermentum fermentum molestie. Donec fermentum sed nunc eget convallis. Nunc
-        porttitor vehicula ex. Nam bibendum nibh vel tortor gravida vestibulum.
+    <div id="maindiv">
+        <div id="content">
+            <button onclick="btnClick()">FULL</button>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra metus at lectus gravida, ac
+            sagittis
+            augue semper. Morbi ac dolor eu ipsum condimentum lacinia. Nunc sed commodo mi. Aliquam eget vehicula enim.
+            Morbi tempor ex vitae lacus rhoncus interdum. Fusce in sem tempor, finibus purus nec, ullamcorper lectus.
+            Phasellus ligula mauris, condimentum nec fermentum ac, condimentum at odio. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Nullam congue eleifend ex sit amet auctor. Donec in lectus pellentesque,
+            tincidunt
+            ipsum vel, elementum mi. Mauris fermentum ullamcorper ante, ut aliquam mi vehicula in. Phasellus et arcu sed
+            nisi auctor pretium. Aliquam fermentum fermentum molestie. Donec fermentum sed nunc eget convallis. Nunc
+            porttitor vehicula ex. Nam bibendum nibh vel tortor gravida vestibulum.
+        </div>
     </div>
 </body>
 
