@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Look Mobile Test</title>
+
+    <style>
+        *. *::after, *::before {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        #content {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            padding: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (e) {
+            screen.orientation.lock('landscape')
+                .then(function () {
+                    alert('ok!');
+                    return;
+                })
+                .catch(error => {
+                    alert(error);
+                    return;
+                });
+        });
+    </script>
+
+    <div id="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pharetra metus at lectus gravida, ac sagittis augue semper. Morbi ac dolor eu ipsum condimentum lacinia. Nunc sed commodo mi. Aliquam eget vehicula enim. Morbi tempor ex vitae lacus rhoncus interdum. Fusce in sem tempor, finibus purus nec, ullamcorper lectus. Phasellus ligula mauris, condimentum nec fermentum ac, condimentum at odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam congue eleifend ex sit amet auctor. Donec in lectus pellentesque, tincidunt ipsum vel, elementum mi. Mauris fermentum ullamcorper ante, ut aliquam mi vehicula in. Phasellus et arcu sed nisi auctor pretium. Aliquam fermentum fermentum molestie. Donec fermentum sed nunc eget convallis. Nunc porttitor vehicula ex. Nam bibendum nibh vel tortor gravida vestibulum.
+    </div>
+</body>
+
+</html>
