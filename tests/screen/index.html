@@ -42,6 +42,25 @@
 <body>
     <script>
         document.addEventListener("DOMContentLoaded", function (e) {
+            toggleFullscreen();
+
+            window.setTimeout(portrait, 2000);
+
+        });
+
+        function toggleFullscreen() {
+            let elem = document.querySelector('#content');
+
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function portrait() {
             screen.orientation.lock('landscape')
                 .then(function () {
                     alert('ok!');
@@ -51,18 +70,6 @@
                     alert(error);
                     return;
                 });
-        });
-
-        function toggleFullscreen() {
-            let elem = document.querySelector('#content');
-
-            if (!document.fullscreenElement) {
-                elem.requestFullscreen().catch(err => {
-                alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
-                });
-            } else {
-                document.exitFullscreen();
-            }
         }
     </script>
 
