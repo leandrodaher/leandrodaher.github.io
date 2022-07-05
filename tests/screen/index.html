@@ -51,6 +51,44 @@
             elem.requestFullscreen();
         }
 
+        toggleFullScreen = function () {
+            let pagina = document.getElementsByTagName('html')[0];
+
+            let isInFullScreen =
+                (document.fullscreenElement && document.fullscreenElement !== null) ||
+                (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+                (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+                (document.msFullscreenElement && document.msFullscreenElement !== null);
+            if (!isInFullScreen) {
+                if (pagina.requestFullScreen) {
+                    // W3C API
+                    pagina.requestFullScreen();
+                } else if (pagina.mozRequestFullScreen) {
+                    // Mozilla current API
+                    pagina.mozRequestFullScreen();
+                } else if (pagina.webkitRequestFullScreen) {
+                    // Webkit current API
+                    pagina.webkitRequestFullScreen();
+                } else if (pagina.webkitEnterFullScreen) {
+                    // se o navegador não suporta full screen, significa que só sobrou o fullscreen nativo para paginas no Safari Mobile, este nós não vamos utilizar pois impede a exibição do CPF na tela
+
+                    // This is the IOS Mobile edge case
+                    // video.webkitEnterFullScreen();
+                }
+
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
         function portrait() {
             screen.orientation.lock('landscape')
                 .then(function () {
